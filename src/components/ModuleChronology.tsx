@@ -74,37 +74,48 @@ export function ModuleChronology() {
           touch.current = null;
         }}>
         <article key={index} className="chronology-slide" style={{ "--slide-scale": scale } as React.CSSProperties} aria-label={`Страница ${index + 1}: ${step.title}`}>
-          <div className="chronology-kicker flex items-center justify-between text-primary"><span>МОДУЛЬ 01 / CUSTOMER DEVELOPMENT</span><span className="flex items-center gap-3"><Clock3 className="size-8" />{step.minutes} мин</span></div>
-          <div className="chronology-heading flex items-start gap-8">
-            <div className="chronology-symbol flex shrink-0 items-center justify-center bg-primary text-primary-foreground"><Icon className="size-16" strokeWidth={1.5} /></div>
-            <div className="min-w-0"><div className="chronology-kicker text-muted-foreground">ТЕМА {String(index + 1).padStart(2, "0")}</div><h3 className="chronology-title mt-4">{step.title}</h3><p className="chronology-definition mt-5 text-muted-foreground">{step.definition}</p></div>
+          <div className="chronology-kicker text-muted-foreground"><span>МОДУЛЬ 01 · CUSTOMER DEVELOPMENT</span><span className="chronology-duration"><Clock3 />{step.minutes} мин</span></div>
+          <div className="chronology-heading">
+            <div className="chronology-symbol bg-primary text-primary-foreground"><Icon strokeWidth={1.5} /></div>
+            <h3 className="chronology-title">{step.title}</h3>
+            <span className="chronology-number text-primary" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
           </div>
-          <dl className="chronology-details grid grid-cols-3 gap-12">
-            <div className="border-t-4 border-primary pt-7"><dt className="chronology-label text-primary">01 / Суть</dt><dd className="chronology-body mt-6 font-medium">{step.essence}</dd></div>
-            <div className="border-t-4 border-accent pt-7"><dt className="chronology-label text-primary">02 / Как делается</dt><dd className="chronology-body mt-6">{step.how}</dd></div>
-            <div className="border-t-4 border-border pt-7"><dt className="chronology-label text-primary">03 / Учебный пример</dt><dd className="chronology-body mt-6 text-muted-foreground">{step.example}</dd></div>
-          </dl>
-          {step.frameworks && step.frameworks.length > 0 && (
-            <div className="chronology-frameworks grid gap-8" style={{ gridTemplateColumns: `repeat(${Math.min(step.frameworks.length, 2)}, 1fr)` }} aria-label="Ключевые понятия темы">
-              {step.frameworks.map((framework) => {
-                const source = moduleOneSources.find((item) => item.id === framework.sourceId);
-                return <div key={framework.term} className="chronology-framework border-t-4 border-primary/40 pt-5">
-                  <dt className="chronology-framework-term text-primary">{framework.term}</dt>
-                  <dd className="chronology-framework-note mt-3 text-muted-foreground">{framework.note}{source && <> (<a href={source.url} target="_blank" rel="noopener noreferrer" title={source.title} className="underline underline-offset-4 hover:text-primary">{source.publisher}</a>)</>}</dd>
-                </div>;
-              })}
-            </div>
-          )}
-          <aside className="chronology-importance border-l-4 border-accent bg-secondary/60" aria-label="Почему это важно для стартапа">
-            <h4 className="chronology-label text-primary">Почему это важно для стартапа</h4>
-            <p className="chronology-importance-body">{step.importance}</p>
+          <div className="chronology-content">
+            <section className="chronology-principle" aria-label="Главная мысль">
+              <h4 className="chronology-label text-primary">Главная мысль</h4>
+              <p className="chronology-essence">{step.essence}</p>
+              <p className="chronology-definition text-muted-foreground">{step.definition}</p>
+              {step.frameworks && step.frameworks.length > 0 && <dl className="chronology-frameworks" aria-label="Ключевые понятия темы">
+                {step.frameworks.map((framework) => {
+                  const source = moduleOneSources.find((item) => item.id === framework.sourceId);
+                  return <div key={framework.term} className="chronology-framework">
+                    <dt className="chronology-framework-term text-primary">{framework.term}</dt>
+                    <dd className="chronology-framework-note text-muted-foreground">{framework.note}{source && <> (<a href={source.url} target="_blank" rel="noopener noreferrer" title={source.title} className="underline underline-offset-4 hover:text-primary">{source.publisher}</a>)</>}</dd>
+                  </div>;
+                })}
+              </dl>}
+            </section>
+            <section className="chronology-method" aria-label="Как делается">
+              <h4 className="chronology-label text-primary">Как делается</h4>
+              <ol className="chronology-steps">
+                {step.how.split(";").map((instruction, position) => <li key={instruction}><span className="chronology-step-number text-primary" aria-hidden="true">{String(position + 1).padStart(2, "0")}</span><p>{instruction.trim().replace(/^./, (letter) => letter.toUpperCase())}</p></li>)}
+              </ol>
+              <div className="chronology-example bg-secondary text-secondary-foreground">
+                <h4 className="chronology-label text-primary">Учебный пример</h4>
+                <p>{step.example}</p>
+              </div>
+            </section>
+          </div>
+          <aside className="chronology-importance" aria-label="Почему это важно для стартапа">
+            <h4 className="chronology-label text-primary">Почему это важно<br className="chronology-desktop-break" /> для стартапа</h4>
+            <p>{step.importance}</p>
           </aside>
-          <footer className="chronology-slide-footer flex items-center justify-between gap-6 border-t">
-            <div className="chronology-sources flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground"><span>Источники:</span>{step.importanceSourceIds.map((id) => {
+          <footer className="chronology-slide-footer">
+            <div className="chronology-sources text-muted-foreground"><span>Источники:</span>{Array.from(new Set([...step.importanceSourceIds, ...(step.frameworks ?? []).map((framework) => framework.sourceId)])).map((id) => {
               const source = moduleOneSources.find((item) => item.id === id);
               return source ? <a key={id} href={source.url} target="_blank" rel="noopener noreferrer" title={source.title} className="underline underline-offset-4 hover:text-primary">{source.publisher}</a> : null;
             })}</div>
-            <Link to="/lesson/$moduleId/$lessonId" params={{ moduleId: "1", lessonId: String(step.lessonId) }} className="chronology-label inline-flex shrink-0 items-center gap-3 text-primary" onClick={() => { if (document.fullscreenElement) void document.exitFullscreen(); }}>К уроку <ArrowUpRight className="size-8" /></Link>
+            <Button asChild variant="link" className="chronology-lesson-link"><Link to="/lesson/$moduleId/$lessonId" params={{ moduleId: "1", lessonId: String(step.lessonId) }} onClick={() => { if (document.fullscreenElement) void document.exitFullscreen(); }}>К уроку <ArrowUpRight /></Link></Button>
           </footer>
         </article>
       </div>
