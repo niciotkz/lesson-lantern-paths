@@ -30,6 +30,16 @@ describe("Module 1 duration", () => {
       expect((content?.timing.theory ?? 0) + (content?.timing.practice ?? 0) + (content?.timing.check ?? 0)).toBe(lesson.minutes);
     }
   });
+
+  it("keeps every timed exercise within its practice allocation", () => {
+    for (const content of moduleOneContent) {
+      const minutes = content.exercise.instructions.reduce((sum, instruction) => {
+        const match = instruction.match(/^(\d+) минут/);
+        return sum + Number(match?.[1] ?? 0);
+      }, 0);
+      expect(minutes).toBe(content.timing.practice);
+    }
+  });
 });
 
 describe("Module workbook", () => {
