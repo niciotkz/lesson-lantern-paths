@@ -149,51 +149,84 @@
   h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; }
 }
 
+.chronology { container-type: inline-size; }
 .chronology-canvas { position: relative; overflow: hidden; aspect-ratio: 16 / 9; touch-action: pan-y; }
-.chronology-slide { position: absolute; display: flex; flex-direction: column; width: 1920px; height: 1080px; left: 50%; top: 50%; margin-left: -960px; margin-top: -540px; transform: scale(var(--slide-scale)); transform-origin: center; padding: 48px 72px; background: var(--card); color: var(--card-foreground); animation: chronology-enter 220ms ease-out; }
-.chronology-kicker { font-size: 24px; line-height: 1.3; }
-.chronology-heading { margin-top: 32px; }
-.chronology-symbol { width: 112px; height: 112px; border-radius: var(--radius); }
-.chronology-title { font-size: 54px; line-height: 1.2; max-width: 1480px; }
-.chronology-definition { font-size: 28px; line-height: 1.4; max-width: 1480px; }
-.chronology-details { margin-top: 28px; }
-.chronology-label { font-size: 28px; line-height: 1.3; font-weight: 600; }
-.chronology-body { font-size: 34px; line-height: 1.4; }
-.chronology-frameworks { margin-top: 28px; }
-.chronology-framework-term { font-size: 26px; line-height: 1.3; font-weight: 600; }
-.chronology-framework-note { font-size: 23px; line-height: 1.4; }
-.chronology-importance { margin-top: 28px; padding: 18px 24px; }
-.chronology-importance-body { margin-top: 10px; font-size: 28px; line-height: 1.4; }
-.chronology-slide-footer { margin-top: auto; padding-top: 18px; }
-.chronology-sources { font-size: 22px; line-height: 1.4; }
+.chronology-slide { position: absolute; display: flex; flex-direction: column; width: 1920px; height: 1080px; left: 50%; top: 50%; margin-left: -960px; margin-top: -540px; transform: scale(var(--slide-scale)); transform-origin: center; padding: 44px 72px 30px; background: var(--card); color: var(--card-foreground); animation: chronology-enter 220ms ease-out; }
+.chronology-kicker { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 21px; line-height: 1.4; }
+.chronology-duration { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.chronology-duration svg { width: 24px; height: 24px; }
+.chronology-heading { display: flex; align-items: center; gap: 26px; margin-top: 24px; padding-bottom: 30px; border-bottom: 2px solid var(--border); }
+.chronology-symbol { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 76px; height: 76px; border-radius: var(--radius); }
+.chronology-symbol svg { width: 40px; height: 40px; }
+.chronology-title { font-family: var(--font-body); font-weight: 650; font-size: 50px; line-height: 1.18; max-width: 1480px; overflow-wrap: anywhere; }
+.chronology-number { margin-left: auto; font-size: 48px; line-height: 1; font-weight: 500; }
+.chronology-content { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 32px; flex: 1; min-height: 0; }
+.chronology-principle { padding-right: 48px; border-right: 2px solid var(--border); }
+.chronology-label { font-family: var(--font-body); font-size: 21px; line-height: 1.4; font-weight: 600; }
+.chronology-essence { margin-top: 16px; font-size: 36px; line-height: 1.35; font-weight: 550; text-wrap: pretty; }
+.chronology-definition { margin-top: 18px; font-size: 26px; line-height: 1.45; text-wrap: pretty; }
+.chronology-frameworks { display: grid; gap: 16px; margin-top: 26px; }
+.chronology-framework { border-top: 1px solid var(--border); padding-top: 14px; }
+.chronology-framework-term { font-size: 24px; line-height: 1.3; font-weight: 600; }
+.chronology-framework-note { margin-top: 8px; font-size: 23px; line-height: 1.4; }
+.chronology-steps { display: grid; gap: 20px; margin-top: 20px; }
+.chronology-steps li { display: grid; grid-template-columns: 40px 1fr; gap: 18px; font-size: 29px; line-height: 1.4; }
+.chronology-step-number { font-size: 22px; padding-top: 4px; font-weight: 600; }
+.chronology-example { margin-top: 30px; padding: 24px 28px; border-left: 4px solid var(--accent); }
+.chronology-example p { margin-top: 12px; font-size: 28px; line-height: 1.45; }
+.chronology-importance { display: grid; grid-template-columns: 280px 1fr; gap: 32px; border-top: 2px solid var(--primary); padding-top: 20px; margin-top: 28px; }
+.chronology-importance p { font-size: 24px; line-height: 1.45; }
+.chronology-slide-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); }
+.chronology-sources { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 19px; line-height: 1.5; }
+.chronology-lesson-link { flex-shrink: 0; height: auto; padding: 0; font-size: 22px; }
+.chronology-lesson-link svg { width: 24px; height: 24px; }
+.chronology-track { overflow-x: auto; }
+.chronology-track > div { min-width: 54px; }
 .chronology-fullscreen { display: flex; flex-direction: column; margin: 0; width: 100%; height: 100dvh; background: var(--card); }
 .chronology-fullscreen .chronology-canvas { flex: 1; min-height: 0; aspect-ratio: auto; }
 @keyframes chronology-enter { from { opacity: 0; } to { opacity: 1; } }
-@media (max-width: 639px) and (orientation: portrait) {
-  .chronology-canvas { aspect-ratio: auto; min-height: 570px; }
-  .chronology-slide { position: relative; width: 100%; height: auto; min-height: 570px; left: auto; top: auto; margin: 0; transform: none; padding: 24px 20px; }
-  .chronology-kicker { font-size: 10px; }
-  .chronology-kicker svg { width: 14px; height: 14px; }
-  .chronology-heading { margin-top: 28px; min-height: 0; gap: 12px; }
+@container (max-width: 1000px) {
+  .chronology-canvas { aspect-ratio: auto; }
+  .chronology-slide { position: relative; width: 100%; height: auto; left: auto; top: auto; margin: 0; transform: none; padding: 28px; }
+  .chronology-kicker { font-size: 11px; }
+  .chronology-duration svg { width: 14px; height: 14px; }
+  .chronology-heading { margin-top: 20px; padding-bottom: 24px; gap: 16px; }
   .chronology-symbol { width: 44px; height: 44px; }
   .chronology-symbol svg { width: 24px; height: 24px; }
-  .chronology-title { font-size: 19px; margin-top: 8px; }
-  .chronology-definition { font-size: 13px; margin-top: 8px; line-height: 1.5; }
-  .chronology-details { grid-template-columns: 1fr; gap: 20px; margin-top: 28px; }
-  .chronology-details > div { border-top-width: 2px; padding-top: 12px; }
+  .chronology-title { font-size: 26px; line-height: 1.25; }
+  .chronology-number { font-size: 24px; }
+  .chronology-content { gap: 28px; margin-top: 24px; }
+  .chronology-principle { padding-right: 24px; border-right-width: 1px; }
   .chronology-label { font-size: 12px; }
-  .chronology-body { font-size: 14px; margin-top: 8px; line-height: 1.6; }
-  .chronology-frameworks { grid-template-columns: 1fr !important; gap: 16px; margin-top: 24px; }
-  .chronology-framework { border-top-width: 2px; padding-top: 10px; }
-  .chronology-framework-term { font-size: 13px; }
-  .chronology-framework-note { font-size: 13px; line-height: 1.6; margin-top: 6px; }
-  .chronology-importance { margin-top: 24px; padding: 14px 12px; }
-  .chronology-importance-body { font-size: 14px; line-height: 1.6; margin-top: 8px; }
-  .chronology-sources { font-size: 10px; }
-  .chronology-slide-footer { position: static; margin-top: 24px; padding-top: 16px; gap: 8px; }
-  .chronology-slide-footer svg { width: 16px; height: 16px; }
-  .chronology-track { overflow-x: auto; }
-  .chronology-track > div { min-width: 54px; }
+  .chronology-essence { font-size: 20px; line-height: 1.4; margin-top: 12px; }
+  .chronology-definition { font-size: 14px; line-height: 1.6; margin-top: 14px; }
+  .chronology-frameworks { gap: 16px; margin-top: 20px; }
+  .chronology-framework-term { font-size: 15px; }
+  .chronology-framework-note { font-size: 14px; line-height: 1.6; margin-top: 6px; }
+  .chronology-steps { margin-top: 16px; gap: 16px; }
+  .chronology-steps li { grid-template-columns: 24px 1fr; gap: 10px; font-size: 16px; line-height: 1.5; }
+  .chronology-step-number { font-size: 12px; }
+  .chronology-example { padding: 18px; margin-top: 24px; }
+  .chronology-example p { font-size: 15px; line-height: 1.6; margin-top: 10px; }
+  .chronology-importance { grid-template-columns: 140px 1fr; gap: 20px; margin-top: 28px; padding-top: 20px; }
+  .chronology-importance p { font-size: 14px; line-height: 1.6; }
+  .chronology-slide-footer { margin-top: 24px; padding-top: 16px; }
+  .chronology-sources { font-size: 11px; gap: 6px 12px; }
+  .chronology-lesson-link { font-size: 13px; }
+  .chronology-lesson-link svg { width: 16px; height: 16px; }
   .chronology-fullscreen .chronology-canvas { overflow-y: auto; min-height: 0; }
+}
+@container (max-width: 600px) {
+  .chronology-slide { padding: 24px 20px; }
+  .chronology-kicker { font-size: 10px; }
+  .chronology-heading { align-items: flex-start; gap: 12px; }
+  .chronology-title { font-size: 22px; }
+  .chronology-number { display: none; }
+  .chronology-content { grid-template-columns: 1fr; gap: 28px; }
+  .chronology-principle { padding-right: 0; border-right: 0; }
+  .chronology-method { padding-top: 24px; border-top: 1px solid var(--border); }
+  .chronology-importance { grid-template-columns: 1fr; gap: 10px; }
+  .chronology-desktop-break { display: none; }
+  .chronology-slide-footer { align-items: flex-start; gap: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .chronology-slide { animation: none; } }
