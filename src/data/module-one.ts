@@ -15,6 +15,8 @@ export const moduleOneSources: LessonSource[] = [
   { id: "consent", title: "Getting informed consent for user research", publisher: "GOV.UK Service Manual", url: "https://www.gov.uk/service-manual/user-research/getting-users-consent-for-research", note: "Добровольность, запись, использование данных и право прекратить участие." },
   { id: "patents", title: "How to Protect Inventions through Patents", publisher: "WIPO / ВОИС", url: "https://www.wipo.int/en/web/patents/protection", note: "Новизна, изобретательский уровень и другие условия патентоспособности." },
   { id: "search", title: "WIPO Guide to Using Patent Information (PDF)", publisher: "WIPO / ВОИС", url: "https://www.wipo.int/edocs/pubdocs/en/wipo-pub-rn2021-1e-en-wipo-guide-to-using-patent-information.pdf", note: "Стратегии поиска: с. 14; ключевые слова: с. 16; классификации: с. 19; непатентная литература: с. 47." },
+  { id: "failure", title: "The Top 12 Reasons Startups Fail", publisher: "CB Insights", url: "https://www.cbinsights.com/research/report/startup-failure-reasons-top/", note: "Анализ причин закрытия стартапов: отсутствие рыночной потребности (no market need) — самая частая причина." },
+  { id: "jtbd", title: "Know Your Customers' \"Jobs to Be Done\"", publisher: "Harvard Business Review · Clayton Christensen", url: "https://hbr.org/2016/09/know-your-customers-jobs-to-be-done", note: "Клиент «нанимает» продукт для выполнения задачи в конкретных обстоятельствах; фокус на задаче, а не на характеристиках покупателя." },
 ];
 
 export const moduleOneContent: LessonContent[] = [
@@ -166,7 +168,7 @@ export const moduleOneContent: LessonContent[] = [
 
 export const moduleOneWorkbookFields = moduleOneContent.flatMap((lesson) => lesson.exercise.fields);
 
-export type ModuleTimelineStep = { lessonId: number; title: string; minutes: number; definition: string; essence: string; how: string; example: string; importance: string; importanceSourceIds: string[] };
+export type ModuleTimelineStep = { lessonId: number; title: string; minutes: number; definition: string; essence: string; how: string; example: string; importance: string; importanceSourceIds: string[]; frameworks?: { term: string; note: string; sourceId: string }[] };
 
 export const moduleOneTimeline: ModuleTimelineStep[] = [
   {
@@ -179,6 +181,10 @@ export const moduleOneTimeline: ModuleTimelineStep[] = [
     essence: "Сильный продукт начинается с конкретной трудности конкретного человека, а не с идеи приложения.",
     how: "Наблюдаем повторяющиеся действия и обходные пути; описываем проблему по шаблону «кто → когда → что мешает → последствие»; отделяем факты от догадок.",
     example: "Администратор учебного центра при переносе занятия вручную сверяет подтверждения из разных переписок.",
+    frameworks: [
+      { term: "No market need", note: "Самая частая причина закрытия стартапов по данным CB Insights — продукт, который никому не нужен. Именно поэтому поиск проблемы идёт первым шагом.", sourceId: "failure" },
+      { term: "Problem Statement", note: "Одно предложение о проблеме без решения: «кто → когда → что мешает → последствие». Если в формулировке появилась технология, это уже не проблема, а догадка.", sourceId: "discovery" },
+    ],
   },
   {
     lessonId: 3,
@@ -190,6 +196,9 @@ export const moduleOneTimeline: ModuleTimelineStep[] = [
     essence: "Интервью изучает прошлое поведение человека, а не собирает одобрение вашей идеи.",
     how: "Сужаем сегмент по поведению; спрашиваем о последнем реальном случае по шагам; заранее согласуем запись и обращение с данными.",
     example: "Вместо «Вам нужен бот?» — «Как вы собрали подтверждения при последнем переносе?»",
+    frameworks: [
+      { term: "Jobs To Be Done (JTBD)", note: "Клиент «нанимает» продукт для задачи в конкретных обстоятельствах. Вопрос интервью — не «кто вы?», а «какую задачу вы пытались решить и что мешало?»", sourceId: "jtbd" },
+    ],
   },
   {
     lessonId: 4,
@@ -201,6 +210,9 @@ export const moduleOneTimeline: ModuleTimelineStep[] = [
     essence: "Значимость проблемы, польза решения и готовность платить — три разные гипотезы, каждая проверяется отдельно.",
     how: "Формулируем проверяемые гипотезы; собираем сокращённый Value Proposition Canvas; заранее записываем, какое наблюдение нас переубедит.",
     example: "«Для администраторов учебных центров — список подтверждений переноса в одном месте вместо ручного сопоставления чатов».",
+    frameworks: [
+      { term: "HMW («How Might We»)", note: "Переформулировка проблемы в открытый вопрос: «Как мы могли бы помочь администратору видеть подтверждения в одном месте?» — открывает варианты, не навязывая решение.", sourceId: "discovery" },
+    ],
   },
   {
     lessonId: 5,
