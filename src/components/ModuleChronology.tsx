@@ -84,6 +84,17 @@ export function ModuleChronology() {
             <div className="border-t-4 border-accent pt-7"><dt className="chronology-label text-primary">02 / Как делается</dt><dd className="chronology-body mt-6">{step.how}</dd></div>
             <div className="border-t-4 border-border pt-7"><dt className="chronology-label text-primary">03 / Учебный пример</dt><dd className="chronology-body mt-6 text-muted-foreground">{step.example}</dd></div>
           </dl>
+          {step.frameworks && step.frameworks.length > 0 && (
+            <div className="chronology-frameworks grid gap-8" style={{ gridTemplateColumns: `repeat(${Math.min(step.frameworks.length, 2)}, 1fr)` }} aria-label="Ключевые понятия темы">
+              {step.frameworks.map((framework) => {
+                const source = moduleOneSources.find((item) => item.id === framework.sourceId);
+                return <div key={framework.term} className="chronology-framework border-t-4 border-primary/40 pt-5">
+                  <dt className="chronology-framework-term text-primary">{framework.term}</dt>
+                  <dd className="chronology-framework-note mt-3 text-muted-foreground">{framework.note}{source && <> (<a href={source.url} target="_blank" rel="noopener noreferrer" title={source.title} className="underline underline-offset-4 hover:text-primary">{source.publisher}</a>)</>}</dd>
+                </div>;
+              })}
+            </div>
+          )}
           <aside className="chronology-importance border-l-4 border-accent bg-secondary/60" aria-label="Почему это важно для стартапа">
             <h4 className="chronology-label text-primary">Почему это важно для стартапа</h4>
             <p className="chronology-importance-body">{step.importance}</p>
