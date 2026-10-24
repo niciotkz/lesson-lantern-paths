@@ -9,3 +9,4 @@
 - [x] Redesign the module chronology as horizontal presentation pages with arrow navigation and verify interactions.
 - [x] Research and add a concise explanation of why each of the eight chronology topics matters; verify slide readability and navigation.
 - [x] Improve the hierarchy and readability of all eight slides; verify navigation and inline/fullscreen layouts at desktop and narrow widths.
+- [x] Translate the supplied teacher code-checking case into Russian and use it consistently across the eight slides; verify readability.
