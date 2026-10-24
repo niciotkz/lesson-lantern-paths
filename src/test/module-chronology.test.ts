@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { moduleOneTimeline } from "@/data/module-one";
+import { moduleOneSources, moduleOneTimeline } from "@/data/module-one";
 import { Route } from "@/routes/lesson.$moduleId.$lessonId";
 
 describe("Chronology page navigation", () => {
@@ -21,5 +21,26 @@ describe("Chronology page navigation", () => {
     expect(validate({ slide: 9 })).toEqual({});
     expect(validate({ slide: 0 })).toEqual({});
     expect(validate({ slide: 1.5 })).toEqual({});
+  });
+});
+
+describe("Chronology key concepts", () => {
+  const termsOn = (lessonId: number) =>
+    (moduleOneTimeline.find((step) => step.lessonId === lessonId)?.frameworks ?? []).map((framework) => framework.term);
+
+  it("places each named concept on its matching topic", () => {
+    expect(termsOn(2)).toEqual(["No market need", "Problem Statement"]);
+    expect(termsOn(3)).toEqual(["Jobs To Be Done (JTBD)"]);
+    expect(termsOn(4)).toEqual(["HMW («How Might We»)"]);
+  });
+
+  it("resolves every concept citation against the shared source catalog", () => {
+    const sourceIds = new Set(moduleOneSources.map((source) => source.id));
+    for (const step of moduleOneTimeline) {
+      for (const framework of step.frameworks ?? []) {
+        expect(framework.note.length).toBeGreaterThan(0);
+        expect(sourceIds.has(framework.sourceId)).toBe(true);
+      }
+    }
   });
 });
