@@ -14,3 +14,4 @@
 - Keep module practice drafts in React session state shared across lesson navigation, with client-side text export; do not claim automatic or cross-device saving.
 - Keep the module chronology in a dedicated presentation component, with URL-driven topic navigation and one shared canvas for inline/fullscreen views; scale a 1920×1080 desktop slide and reflow the same content on portrait phones for readable text.
 - Keep each chronology topic's importance explanation and source IDs in the lesson data; resolve citations against the shared source catalog so slide content and attribution stay together.
+- Reflow chronology slides based on the canvas width as well as portrait orientation, so a narrow lesson column never reduces presentation text to unreadable scaled text.
