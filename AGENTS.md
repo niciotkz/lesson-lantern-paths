@@ -16,3 +16,4 @@
 - Keep each chronology topic's importance explanation and source IDs in the lesson data; resolve citations against the shared source catalog so slide content and attribution stay together.
 - Reflow chronology slides based on the canvas width as well as portrait orientation, so a narrow lesson column never reduces presentation text to unreadable scaled text.
 - Keep the chronology case and passport fields in shared lesson data; render the final passport as a dedicated field grid to preserve consistency without crowding the teaching slides.
+- Reuse shared case values in lesson examples and retain unique workbook field IDs across the module so slide revisions and exported practice stay consistent.
