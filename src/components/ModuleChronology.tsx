@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Clock3, Maximize, Minimize, Search, Users, Lightbulb, FlaskConical, PanelsTopLeft, ScanSearch, Combine, NotebookPen } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { moduleOneCase, moduleOneCaseFields, moduleOneSources, moduleOneTimeline } from "@/data/module-one";
+import { moduleOneCaseFields, moduleOneSources, moduleOneTimeline } from "@/data/module-one";
 import { cn } from "@/lib/utils";
 
 const icons = [Search, Users, Lightbulb, FlaskConical, PanelsTopLeft, ScanSearch, Combine, NotebookPen];
@@ -80,7 +80,7 @@ export function ModuleChronology() {
             <h3 className="chronology-title">{step.title}</h3>
             <span className="chronology-number text-primary" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
           </div>
-          {step.lessonId === 9 ? <dl className="chronology-content chronology-passport" aria-label="Паспорт идеи автора">
+          {step.lessonId === 9 ? <dl className="chronology-content chronology-passport" aria-label="Паспорт идеи">
             {moduleOneCaseFields.map((field) => <div key={field.label}>
               <dt className="chronology-label text-primary">{field.label}</dt>
               <dd>{field.value}</dd>
@@ -116,7 +116,7 @@ export function ModuleChronology() {
             <p>{step.importance}</p>
           </aside>
           <footer className="chronology-slide-footer">
-            <div className="chronology-sources text-muted-foreground"><span>Автор кейса: {moduleOneCase.author}</span><span>Источники:</span>{Array.from(new Set([...step.importanceSourceIds, ...(step.frameworks ?? []).map((framework) => framework.sourceId)])).map((id) => {
+            <div className="chronology-sources text-muted-foreground"><span>Источники:</span>{Array.from(new Set([...step.importanceSourceIds, ...(step.frameworks ?? []).map((framework) => framework.sourceId)])).map((id) => {
               const source = moduleOneSources.find((item) => item.id === id);
               return source ? <a key={id} href={source.url} target="_blank" rel="noopener noreferrer" title={source.title} className="underline underline-offset-4 hover:text-primary">{source.publisher}</a> : null;
             })}</div>
