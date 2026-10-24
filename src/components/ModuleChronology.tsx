@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Clock3, Maximize, Minimize, Search, Users, Lightbulb, FlaskConical, PanelsTopLeft, ScanSearch, Combine, NotebookPen } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { moduleOneCase, moduleOneCaseFields, moduleOneSources, moduleOneTimeline } from "@/data/module-one";
+import { moduleOneCaseFields, moduleOneSources, moduleOneTimeline } from "@/data/module-one";
 import { cn } from "@/lib/utils";
 
 const icons = [Search, Users, Lightbulb, FlaskConical, PanelsTopLeft, ScanSearch, Combine, NotebookPen];
